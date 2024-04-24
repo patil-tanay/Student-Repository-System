@@ -1,65 +1,62 @@
-// Admin.js
 import React, { useState, useEffect } from 'react';
 import { firestore } from '../firebase';
-import withAuthRole from '../utils/withAuthRole';
 
-const Admin = () => {
+const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const snapshot = await firestore.collection('users').get();
-        const fetchedUsers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setUsers(fetchedUsers);
+        const usersRef = firestore.collection('users');
+        const snapshot = await usersRef.get();
+        const userList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setUsers(userList);
       } catch (error) {
-        console.error('Error fetching users:', error);
+        setError(error.message);
       }
     };
+
     fetchUsers();
   }, []);
-
-  const changeUserRole = async (userId, newRole) => {
-    try {
-      await firestore.collection('users').doc(userId).update({ role: newRole });
-      // Update state or display a success message
-    } catch (error) {
-      console.error('Error changing user role:', error);
-    }
-  };
 
   const deleteUser = async (userId) => {
     try {
       await firestore.collection('users').doc(userId).delete();
-      setUsers(users.filter(user => user.id !== userId));
-      // Display a success message
+      setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
     } catch (error) {
-      console.error('Error deleting user:', error);
+      setError(error.message);
     }
   };
 
   return (
     <div>
       <h2>Admin Dashboard</h2>
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>
-            {user.email} - Role: {user.role}
-            {user.role !== 'admin' && (
-              <>
-                <select value={user.role} onChange={(e) => changeUserRole(user.id, e.target.value)}>
-                  <option value="student">Student</option>
-                  <option value="faculty">Faculty</option>
-                  <option value="admin">Admin</option>
-                </select>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.email}</td> {/* Ensure 'email' field is correctly fetched */}
+              <td>{user.role}</td>
+              <td>
                 <button onClick={() => deleteUser(user.id)}>Delete</button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default withAuthRole(['admin'])(Admin);
+export default AdminDashboard;
