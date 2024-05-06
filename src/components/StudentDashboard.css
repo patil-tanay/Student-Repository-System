@@ -1,0 +1,161 @@
+.education-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .education-details h3 {
+    margin-top: 0;
+  }
+  
+  .education-details li {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+
+  .experience-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .experience-details h3 {
+    margin-top: 0;
+  }
+  
+  .experience-details li {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+
+  .achievement-details li {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+
+  .extra-curricular-details li {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .small-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+
+
+
+  /* StudentDashboard.css */
+
+.student-dashboard-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.select-section {
+  margin-bottom: 20px;
+}
+
+.section-container {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.textarea-input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+.small-button {
+  background-color: #008cba;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.small-button:hover {
+  background-color: #007b8a;
+}
+
+.list-container {
+  margin-top: 20px;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+
+

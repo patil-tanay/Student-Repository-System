@@ -8,10 +8,13 @@ import Admin from './components/Admin';
 import FacultyDashboard from './components/FacultyDashboard';
 import EducationForm from './components/EducationForm';
 import StudentDashboard from './components/StudentDashboard';
+import AuthProvider from './components/AuthProvider';
+// import ci from './components/ci';
 // import achievement from './components/AchievementsPage';
 const App = () => {
   return (
     <Router>
+      <AuthProvider>
       <Routes>
         <Route path="/" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
@@ -20,8 +23,10 @@ const App = () => {
         <Route path="/education" element={<EducationForm />}></Route>
         <Route path="/faculty" element={<FacultyDashboard />}></Route>
         <Route path="/StudentDashboard" element={<StudentDashboard />}></Route>
+        {/* <Route path="/ci" element={<ci />}></Route> */}
         
       </Routes>
+      </AuthProvider>
     </Router>
   );
 };
