@@ -1,111 +1,70 @@
-// import React, { useState } from 'react';
-// import { auth, firestore } from '../firebase';
-
-// const SignUp = () => {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [role, setRole] = useState('');
-//   const [error, setError] = useState(null);
-//   const [successMessage, setSuccessMessage] = useState('');
-
-//   const handleSignUp = async (e) => {
-//     e.preventDefault();
-//     try {
-//       setError(null); // Clear any previous error
-//       // Create user with email and password
-//       const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-//       const user = userCredential.user;
-
-//       // Set role in Firestore user profile
-//       await firestore.collection('users').doc(user.uid).set({
-//         email: user.email,
-//         role: role
-//       });
-      
-
-//       setSuccessMessage('Account created successfully!'); // Display success message
-//       // Optionally, you can redirect the user to another page after successful sign-up
-//     } catch (error) {
-//       setError(error.message); // Set error message
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h2>Sign Up</h2>
-//       <form onSubmit={handleSignUp}>
-//         <label>Email:</label>
-//         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-//         <label>Password:</label>
-//         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-//         <label>Role:</label>
-//         <select value={role} onChange={(e) => setRole(e.target.value)} required>
-//           <option value="">Select Role</option>
-//           <option value="student">Student</option>
-//           <option value="faculty">Faculty</option>
-//           <option value="admin">Admin</option>
-//         </select>
-//         <button type="submit">Sign Up</button>
-//       </form>
-//       {error && <p style={{ color: 'red' }}>{error}</p>}
-//       {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-//     </div>
-//   );
-// };
-
-// export default SignUp;
-
-
-
-
-
-
+// Import React and useState
 import React, { useState } from 'react';
 import { auth, firestore } from '../firebase';
-import { useNavigate } from 'react-router-dom';
+import './SignUp.css'; // Import your CSS file
 
-function Signup() {
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
-  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
-  
-
-  const handleSignup = async () => {
+  const handleSignUp = async (e) => {
+    e.preventDefault();
     try {
+      setError(null); // Clear any previous error
+      // Create user with email and password
       const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-      await firestore.collection('users').doc(userCredential.user.uid).set({
-        email,
-        role
+      const user = userCredential.user;
+
+      // Set role in Firestore user profile
+      await firestore.collection('users').doc(user.uid).set({
+        email: user.email,
+        role: role
       });
-      // Redirect user based on role
-      if (role === 'student') {
-        navigate('/dashboard');
-        // Redirect to student dashboard
-      } else if (role === 'admin') {
-        // Redirect to admin dashboard
-      } else if (role === 'faculty') {
-        // Redirect to faculty dashboard
-      }
+      
+      setSuccessMessage('Account created successfully!'); // Display success message
+      // Clear input fields
+      setEmail('');
+      setPassword('');
+      setRole('');
+      // Optionally, you can redirect the user to another page after successful sign-up
     } catch (error) {
-      console.error(error);
+      setError(error.message); // Set error message
     }
   };
 
   return (
-    <div>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <select value={role} onChange={(e) => setRole(e.target.value)}>
-        <option value="">Select Role</option>
-        <option value="student">Student</option>
-        <option value="admin">Admin</option>
-        <option value="faculty">Faculty</option>
-      </select>
-      <button onClick={handleSignup}>Signup</button>
+    <div className="signup-container">
+      <div className="left-section">
+      <img
+          src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700"
+          alt="Login illustration"
+          className="login-illustration"
+        /> 
+      </div>
+      <div className="right-section">
+        <h2 className="signup-header">Sign Up</h2>
+        <form className="signup-form" onSubmit={handleSignUp}>
+          <label>Email:</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <label>Password:</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <label>Role:</label>
+          <select value={role} onChange={(e) => setRole(e.target.value)} required>
+            <option value="">Select Role</option>
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+            <option value="admin">Admin</option>
+          </select>
+          <button type="submit">Sign Up</button>
+        </form>
+        {error && <p className="error">{error}</p>}
+        {successMessage && <p className="success">{successMessage}</p>}
+      </div>
     </div>
   );
-}
+};
 
-export default Signup;
+export default SignUp;

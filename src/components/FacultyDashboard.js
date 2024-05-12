@@ -1,107 +1,156 @@
-// // FacultyDashboard.js
-// import React, { useState, useEffect } from 'react';
-// import { firestore } from '../firebase';
+// import React, { useEffect, useState } from 'react';
+// import { firestore } from './firebase'; // Assuming 'firestore' is imported from firebase
 
-// const FacultyDashboard = () => {
-//   const [studentDetails, setStudentDetails] = useState([]);
+// function FacultyDashboard() {
+//   const [studentData, setStudentData] = useState([]);
+//   const [searchQuery, setSearchQuery] = useState('');
 
 //   useEffect(() => {
-//     const fetchStudentDetails = async () => {
-//       try {
-//         const snapshot = await firestore.collection('studentDetails').get();
-//         const fetchedDetails = snapshot.docs.map(doc => doc.data());
-//         setStudentDetails(fetchedDetails);
-//       } catch (error) {
-//         console.error('Error fetching student details:', error);
-//       }
+//     const fetchStudentData = async () => {
+//       const studentsRef = await firestore.collection('users').where('role', '==', 'student').get();
+//       const studentsData = studentsRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+//       setStudentData(studentsData);
 //     };
-//     fetchStudentDetails();
+
+//     fetchStudentData();
 //   }, []);
 
 //   return (
 //     <div>
-//       <h2>Faculty Dashboard</h2>
+//       <h1>Faculty Dashboard</h1>
+//       <input
+//         type="text"
+//         value={searchQuery}
+//         onChange={(e) => setSearchQuery(e.target.value)}
+//         placeholder="Search by name or email"
+//       />
 //       <table>
 //         <thead>
 //           <tr>
 //             <th>Name</th>
 //             <th>Email</th>
-//             <th>Gender</th>
-//             {/* Add more table headers for additional details */}
+//             <th>Role</th>
+//             <th>Enrollment No</th>
+//             <th>Class</th>
 //           </tr>
 //         </thead>
 //         <tbody>
-//           {studentDetails.map((student, index) => (
-//             <tr key={index}>
-//               <td>{student.name}</td>
-//               <td>{student.email}</td>
-//               <td>{student.gender}</td>
-//               {/* Add more table cells for additional details */}
-//             </tr>
-//           ))}
+//           {studentData
+//             .filter((student) => {
+//               const name = student.name || '';
+//               const email = student.email || '';
+//               const selectedClass = student.selectedClass || '';
+//               return (
+//                 name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+//                 selectedClass.toLowerCase().includes(searchQuery.toLowerCase()) ||
+//                 email.toLowerCase().includes(searchQuery.toLowerCase())
+//               );
+//             })
+//             .map((student, index) => (
+//               <tr key={student.id}>
+//                 <td>{student.name}</td>
+//                 <td>{student.email}</td>
+//                 <td>{student.role}</td>
+//                 <td>{student.enrollmentNumber}</td>
+//                 <td>{student.selectedClass}</td>
+//               </tr>
+//             ))}
 //         </tbody>
 //       </table>
 //     </div>
 //   );
-// };
+// }
 
 // export default FacultyDashboard;
 
 
 
-// FacultyDashboard.js
-import React, { useState, useEffect } from 'react';
-import { firestore } from '../firebase';
+import React, { useEffect, useState } from 'react';
+import { firestore } from './firebase';
+import * as XLSX from 'xlsx'; // Import xlsx library
 
-const FacultyDashboard = () => {
-  const [studentDetails, setStudentDetails] = useState([]);
+function FacultyDashboard() {
+  const [studentData, setStudentData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    const fetchStudentDetails = async () => {
-      try {
-        const snapshot = await firestore.collection('students').get();
-        const fetchedDetails = snapshot.docs.map(doc => doc.data());
-        setStudentDetails(fetchedDetails);
-      } catch (error) {
-        console.error('Error fetching student details:', error);
-      }
+    const fetchStudentData = async () => {
+      const studentsRef = await firestore.collection('users').where('role', '==', 'student').get();
+      const studentsData = studentsRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setStudentData(studentsData);
     };
-    fetchStudentDetails();
+
+    fetchStudentData();
   }, []);
+
+  // Function to handle Excel export
+  const handleExportToExcel = () => {
+    const filteredData = studentData.filter((student) => {
+      const name = student.name || '';
+      const email = student.email || '';
+      const selectedClass = student.selectedClass || '';
+      return (
+        name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        selectedClass.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        email.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    });
+
+    // Create a new workbook
+    const workbook = XLSX.utils.book_new();
+    // Convert data to worksheet
+    const worksheet = XLSX.utils.json_to_sheet(filteredData);
+    // Add worksheet to workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Filtered Data');
+    // Save workbook to file
+    XLSX.writeFile(workbook, 'filtered_data.xlsx');
+  };
 
   return (
     <div>
-      <h2>Faculty Dashboard</h2>
+      <h1>Faculty Dashboard</h1>
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search by name, email, or class"
+      />
+      <button onClick={handleExportToExcel}>Export to Excel</button>
       <table>
         <thead>
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Gender</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>City</th>
-            <th>Date of Birth</th>
-            {/* Add more table headers for additional details */}
+            <th>Role</th>
+            <th>Enrollment No</th>
+            <th>Class</th>
           </tr>
         </thead>
         <tbody>
-          {studentDetails.map((student, index) => (
-            <tr key={index}>
-              <td>{student.name}</td>
-              <td>{student.email}</td>
-              <td>{student.gender}</td>
-              <td>{student.address}</td>
-              <td>{student.phone}</td>
-              <td>{student.city}</td>
-              <td>{student.dob}</td>
-              {/* Add more table cells for additional details */}
-            </tr>
-          ))}
+          {studentData
+            .filter((student) => {
+              const name = student.name || '';
+              const email = student.email || '';
+              const selectedClass = student.selectedClass || '';
+              return (
+                name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                selectedClass.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                email.toLowerCase().includes(searchQuery.toLowerCase())
+              );
+            })
+            .map((student, index) => (
+              <tr key={student.id}>
+                <td>{student.name}</td>
+                <td>{student.email}</td>
+                <td>{student.role}</td>
+                <td>{student.enrollmentNumber}</td>
+                <td>{student.selectedClass}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
   );
-};
+}
 
 export default FacultyDashboard;

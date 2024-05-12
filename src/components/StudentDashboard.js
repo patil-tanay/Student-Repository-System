@@ -1,83 +1,153 @@
-// // StudentDashboard.js
-// import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-// import { firestore } from '../firebase';
+import React, { useEffect, useState } from 'react';
+import { auth, firestore } from './firebase';
+import EducationSection from './EducationSection';
+import ExperienceSection from './ExperienceSection';
+import AchievementSection from './AchievementSection';
+import ExtraCurricularSection from './ExtraCurricularSection';
+import SkillsSection from './SkillsSection';
+import ProfileSection from './ProfileSection'; // Import ProfileSection component
+import MarksheetSection from './MarksheetSection';
+import ProjectSection from './ProjectSection';
+import './StudentDashboard.css'; // Import CSS file for styling
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-// const StudentDashboard = ({ userId }) => {
-//   const [education, setEducation] = useState(null);
+function StudentDashboard() {
+  const [userData, setUserData] = useState(null);
+  const [educationDetails, setEducationDetails] = useState([]);
+  const [experienceDetails, setExperienceDetails] = useState([]);
+  const [achievementDetails, setAchievementDetails] = useState([]);
+  const [selectedSection, setSelectedSection] = useState('profile');
+  const [extraCurricularDetails, setExtraCurricularDetails] = useState([]);
+  const [skills, setSkills] = useState([]);
+  const [marksheetDetails, setMarksheetDetails] = useState([]);
+  const [projectDetails, setProjectDetails] = useState([]); 
+  const navigate = useNavigate(); 
 
-//   useEffect(() => {
-//     const fetchEducation = async () => {
-//       try {
-//         const doc = await firestore.collection('education').doc(userId).get();
-//         if (doc.exists) {
-//           setEducation(doc.data());
-//         }
-//       } catch (error) {
-//         console.error('Error fetching education details:', error);
-//       }
-//     };
-//     fetchEducation();
-//   }, [userId]);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDoc = await firestore.collection('users').doc(user.uid).get();
+        if (userDoc.exists) {
+          setUserData(userDoc.data());
+          if (userDoc.data().educationDetails) {
+            setEducationDetails(userDoc.data().educationDetails);
+          }
+          if (userDoc.data().experienceDetails) {
+            setExperienceDetails(userDoc.data().experienceDetails);
+          }
+          if (userDoc.data().achievementDetails) {
+            setAchievementDetails(userDoc.data().achievementDetails);
+          }
+          if (userDoc.data().extraCurricularDetails) {
+            setExtraCurricularDetails(userDoc.data().extraCurricularDetails);
+          }
+          if (userDoc.data().skills) {
+            setSkills(userDoc.data().skills);
+          }
+          if (userDoc.data().marksheetDetails) { // Fetch marksheet details if available
+            setMarksheetDetails(userDoc.data().marksheetDetails);
+          }
+          if (userDoc.data().projectDetails) { // Fetch project details if available
+            setProjectDetails(userDoc.data().projectDetails);
+          }
+        }
+      }
+    };
 
-//   return (
-//     <div>
-//       <h2>Student Dashboard</h2>
-//       {education ? (
-//         <div>
-//           <h3>Education Details</h3>
-//           <p>College Name: {education.collegeName}</p>
-//           <p>School Name: {education.schoolName}</p>
-//           <p>Percentage: {education.percentage}</p>
-//           <p>CGPA: {education.cgpa}</p>
-//           <p>Passing Year: {education.passingYear}</p>
-//           <Link to="/education">
-//             <button>Edit Education Details</button>
-//           </Link>
-//         </div>
-//       ) : (
-//         <Link to="/education">
-//           <button>Add Education Details</button>
-//         </Link>
-//       )}
-//       {/* Other content of the StudentDashboard */}
-//     </div>
-//   );
-// };
+    fetchUserData();
+  }, []);
+  const onUpdateProfile = async (updatedProfile) => {
+    const user = auth.currentUser;
+    if (user) {
+      await firestore.collection('users').doc(user.uid).update(updatedProfile);
+      setUserData({ ...userData, ...updatedProfile });
+    }
+  };
+  const onUpdateSkills = async (updatedSkills) => {
+    const user = auth.currentUser;
+    if (user) {
+      await firestore.collection('users').doc(user.uid).update({
+        skills: updatedSkills
+      });
+      setSkills(updatedSkills);
+    }
+  };
 
-// export default StudentDashboard;
+  const handleSectionClick = (section) => {
+    setSelectedSection(section);
+  };
 
+  const handleLogout = () => {
+    auth.signOut();
+    navigate('/');
+  };
 
-
-import React from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
-import Profile from './Profile';
-import Academics from './Academics';
-import Achievements from './Achievements';
-import Extracurricular from './Extracurricular';
-
-const Dashboard = () => {
   return (
-    <div className="dashboard">
+    <div className="dashboard-container">
       <div className="sidebar">
-        <h2>Dashboard</h2>
+        <h1>Dashboard</h1>
         <ul>
-          <li><Link to="/dashboard/profile">Profile</Link></li>
-          <li><Link to="/dashboard/academics">Academics</Link></li>
-          <li><Link to="/dashboard/achievements">Achievements</Link></li>
-          <li><Link to="/dashboard/extracurricular">Extracurricular</Link></li>
+          <li onClick={() => handleSectionClick('profile')}>Profile</li>
+          <li onClick={() => handleSectionClick('education')}>Education</li>
+          <li onClick={() => handleSectionClick('experience')}>Experience</li>
+          <li onClick={() => handleSectionClick('achievement')}>Achievements</li>
+          <li onClick={() => handleSectionClick('extracurricular')}>Extra Curricular</li>
+          <li onClick={() => handleSectionClick('skills')}>Skills</li>
+          <li onClick={() => handleSectionClick('marksheets')}>Marksheets</li>
+          <li onClick={() => handleSectionClick('projects')}>Projects</li>
         </ul>
+        <button onClick={handleLogout}>Logout</button>
       </div>
-      <div className="content">
-        <Routes>
-          <Route path="/dashboard/profile" element={<Profile />} />
-          <Route path="/dashboard/academics" element={<Academics />} />
-          <Route path="/dashboard/achievements" element={<Achievements />} />
-          <Route path="/dashboard/extracurricular" element={<Extracurricular />} />
-        </Routes>
+      <div className="main-content">
+        {selectedSection === 'profile' && userData && (
+          <ProfileSection userData={userData} onUpdateProfile={onUpdateProfile} />
+        )}
+        {selectedSection === 'education' && (
+          <EducationSection
+            educationDetails={educationDetails}
+            setEducationDetails={setEducationDetails}
+          />
+        )}
+        {selectedSection === 'experience' && (
+          <ExperienceSection
+            experienceDetails={experienceDetails}
+            setExperienceDetails={setExperienceDetails}
+          />
+        )}
+        {selectedSection === 'achievement' && (
+          <AchievementSection
+            achievementDetails={achievementDetails}
+            setAchievementDetails={setAchievementDetails}
+          />
+        )}
+        {selectedSection === 'extracurricular' && (
+          <ExtraCurricularSection
+            extraCurricularDetails={extraCurricularDetails}
+            setExtraCurricularDetails={setExtraCurricularDetails}
+          />
+        )}
+        {selectedSection === 'skills' && (
+          <SkillsSection
+            skills={skills}
+            onUpdateSkills={onUpdateSkills}
+          />
+        )}
+         {selectedSection === 'marksheets' && ( 
+          <MarksheetSection
+            marksheetDetails={marksheetDetails}
+            setMarksheetDetails={setMarksheetDetails}
+          />
+        )}
+        {selectedSection === 'projects' && (
+          <ProjectSection
+            projectDetails={projectDetails}
+            setProjectDetails={setProjectDetails}
+          />
+        )}
       </div>
     </div>
   );
-};
+}
 
-export default Dashboard;
+export default StudentDashboard;

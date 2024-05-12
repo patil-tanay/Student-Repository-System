@@ -1,0 +1,64 @@
+.project-section {
+    width: 100%;
+  }
+  
+  .project-details {
+    margin-top: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .github-link {
+    background-color: transparent;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .github-link:hover {
+    color: darkblue;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .add-button {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .add-button:hover {
+    background-color: #45a049;
+  }
+  
+  .edit-button, .delete-button {
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .edit-button:hover, .delete-button:hover {
+    background-color: #f2f2f2;
+  }
+  

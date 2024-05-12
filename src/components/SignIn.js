@@ -1,6 +1,8 @@
+// Import React, useState, and CSS file
 import React, { useState } from 'react';
 import { auth, firestore } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import './SignIn.css'; // Import your CSS file
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -23,15 +25,14 @@ const SignIn = () => {
       // Redirect user to the appropriate dashboard based on role
       switch (userRole) {
         case 'student':
-          navigate('/dashboard');
+          navigate('/StudentDashboard');
           break;
         case 'admin':
           navigate('/admin');
           break;
-
-          case 'faculty':
-            navigate('/faculty');
-            break;
+        case 'faculty':
+          navigate('/faculty');
+          break;
         // Add more cases for other roles if needed
         default:
           // Redirect to a default dashboard or home page if role is unknown
@@ -43,30 +44,41 @@ const SignIn = () => {
   };
 
   return (
-    <div>
-      <h2>Sign In</h2>
-      {error && <p>{error}</p>}
-      <form onSubmit={handleSignIn}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Sign In</button>
-      </form>
+    <div className="signin-container">
+      <div className="left-section">
+        <img
+          src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700"
+          alt="Login illustration"
+          className="login-illustration"
+        />
+      </div>
+      <div className="right-section">
+        <h2 className="signin-header">Sign In</h2>
+        {error && <p className="error">{error}</p>}
+        <form className="signin-form" onSubmit={handleSignIn}>
+          <div className="form-group">
+            <label>Email:</label>
+            <input
+              className="form-input"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password:</label>
+            <input
+              className="form-input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button className="signin-button" type="submit">Sign In</button>
+        </form>
+      </div>
     </div>
   );
 };

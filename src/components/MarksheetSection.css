@@ -1,0 +1,143 @@
+/* MarksheetSection.css */
+.marksheet-section {
+    margin-top: 20px;
+  }
+  
+  .marksheet-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .marksheet-section button {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .marksheet-form {
+    margin-bottom: 20px;
+  }
+  
+  .select-field, .input-field, .file-field {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .add-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .header {
+    font-weight: bold;
+  }
+  
+  .marksheet-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .marksheet-details li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .view-button, .delete-button {
+    background-color: #f44336;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .view-button {
+    background-color: #2196F3;
+  }
+  
+
+  .marksheets-section {
+    padding: 20px;
+  }
+  
+  .marksheets-form {
+    margin-bottom: 20px;
+  }
+  
+  .marksheets-form input[type="text"],
+  .marksheets-form input[type="file"],
+  .marksheets-form button {
+    margin-right: 10px;
+  }
+  
+  .marksheets-details {
+    width: 100%;
+  }
+  
+  .marksheets-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .marksheets-table th,
+  .marksheets-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .marksheets-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .marksheets-table td {
+    text-align: left;
+  }
+  
+  .view-button,
+  .delete-button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .view-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .view-button:hover {
+    background-color: #45a049;
+  }
+  
+  .delete-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .delete-button:hover {
+    background-color: #d32f2f;
+  }
+  
+  .add-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #008CBA;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .add-button:hover {
+    background-color: #007bb9;
+  }
+  

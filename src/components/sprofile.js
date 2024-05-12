@@ -152,7 +152,7 @@
 import React, { useEffect, useState } from 'react';
 import { auth, firestore } from './firebase';
 import './StudentDashboard.css'; // Import CSS file for styling
-
+// import '../style/StudentDashboard.css'; // Import CSS file for styling
 function StudentDashboard() {
   const [userData, setUserData] = useState(null);
   const [selectedSection, setSelectedSection] = useState('Profile');

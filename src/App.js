@@ -6,7 +6,7 @@ import SignUp from './components/SignUp';
 import Dashboard from './components/sprofile';
 import Admin from './components/Admin';
 import FacultyDashboard from './components/FacultyDashboard';
-import EducationForm from './components/EducationForm';
+import EducationForm from './components/EducationSection';
 import StudentDashboard from './components/StudentDashboard';
 import AuthProvider from './components/AuthProvider';
 // import ci from './components/ci';

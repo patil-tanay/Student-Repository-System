@@ -1,0 +1,92 @@
+.experience-section {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .experience-section h2 {
+    margin-top: 0;
+  }
+  
+  .experience-form {
+    margin-bottom: 20px;
+  }
+  
+  .input-field {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .textarea-field {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  
+  .date-field {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .add-button,
+  .update-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .delete-button,
+  .edit-button {
+    background-color: #365cf4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    margin-right: 10px;
+  }
+  
+  .experience-details {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+  }
+  
+  .experience-details h3 {
+    margin-top: 0;
+  }
+  
+  .experience-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .experience-details li {
+    margin-bottom: 10px;
+  }
+  
+  .header {
+    font-weight: bold;
+  }
+  
+  .header p {
+    margin: 0;
+  }
+  
