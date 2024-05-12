@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { auth, firestore } from './firebase';
+import '../style/ExtraCurricularSection.css';
 
 function ExtraCurricularSection({ onUpdateExtraCurricularDetails, onDeleteExtraCurricularDetail }) {
   const [extraCurricularDetails, setExtraCurricularDetails] = useState([]);
@@ -75,7 +76,7 @@ function ExtraCurricularSection({ onUpdateExtraCurricularDetails, onDeleteExtraC
   };
 
   return (
-    <div>
+    <div className='extra-curricular-section'>
       <h2>Extra-curricular</h2>
       {!showAddExtraCurricular && (
         <button onClick={() => setShowAddExtraCurricular(true)}>Add Extra-curricular</button>

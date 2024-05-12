@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../style/SkillsSection.css'; // Import CSS file for styling
 
 function SkillsSection({ skills, onUpdateSkills }) {
   const [newSkill, setNewSkill] = useState('');
@@ -18,9 +19,9 @@ function SkillsSection({ skills, onUpdateSkills }) {
   };
 
   return (
-    <div>
+    <div className="skills-section-container">
       <h2>Skills</h2>
-      <div>
+      <div className="input-container">
         <input
           type="text"
           value={newSkill}
@@ -29,7 +30,7 @@ function SkillsSection({ skills, onUpdateSkills }) {
         />
         <button onClick={handleAddSkill}>Add</button>
       </div>
-      <ul>
+      <ul className="skills-list">
         {skills.map((skill, index) => (
           <li key={index}>
             {skill}

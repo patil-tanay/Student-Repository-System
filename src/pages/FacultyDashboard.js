@@ -66,7 +66,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { firestore } from './firebase';
+import { firestore } from '../components/firebase';
 import * as XLSX from 'xlsx'; // Import xlsx library
 
 function FacultyDashboard() {

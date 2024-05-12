@@ -1,5 +1,4 @@
-/* ProfileSection.css
-.profile-section-container {
+/* .profile-section-container {
     width: 100%;
     padding: 20px;
   }
@@ -72,7 +71,79 @@
     color: white;
     border: none;
   }
-   */
+  
 
 
-   
+    */
+
+
+    .profile-section-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-section-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .edit-profile-form,
+    .profile-section-data {
+      margin-top: 20px;
+    }
+    
+    .profile-section-field {
+      margin-bottom: 15px;
+    }
+    
+    .profile-section-field label {
+      display: inline-block;
+      width: 120px;
+      font-weight: bold;
+    }
+    
+    .profile-section-field input,
+    .profile-section-field textarea,
+    .profile-section-field select {
+      width: calc(100% - 120px);
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    .profile-section-actions {
+      margin-top: 20px;
+    }
+    
+    .profile-section-actions button {
+      padding: 8px 20px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .profile-section-actions .save {
+      background-color: #4caf50;
+      color: #fff;
+    }
+    
+    .profile-section-actions .cancel {
+      background-color: #f44336;
+      color: #fff;
+    }
+    
+    .profile-section-item {
+      margin-bottom: 10px;
+    }
+    
+    .profile-section-item .item-label {
+      font-weight: bold;
+    }
+    
+    .profile-section-item .item-value {
+      margin-left: 10px;
+    }
+      

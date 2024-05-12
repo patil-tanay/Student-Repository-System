@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { auth, firestore } from './firebase';
-import EducationSection from './EducationSection';
-import ExperienceSection from './ExperienceSection';
-import AchievementSection from './AchievementSection';
-import ExtraCurricularSection from './ExtraCurricularSection';
-import SkillsSection from './SkillsSection';
-import ProfileSection from './ProfileSection'; // Import ProfileSection component
-import MarksheetSection from './MarksheetSection';
-import ProjectSection from './ProjectSection';
-import './StudentDashboard.css'; // Import CSS file for styling
+import { auth, firestore } from '../components/firebase';
+import EducationSection from '../components/EducationSection';
+import ExperienceSection from '../components/ExperienceSection';
+import AchievementSection from '../components/AchievementSection';
+import ExtraCurricularSection from '../components/ExtraCurricularSection';
+import SkillsSection from '../components/SkillsSection';
+import ProfileSection from '../components/ProfileSection'; // Import ProfileSection component
+import MarksheetSection from '../components/MarksheetSection';
+import ProjectSection from '../components/ProjectSection';
+import '../style/StudentDashboard.css'; // Import CSS file for styling
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function StudentDashboard() {

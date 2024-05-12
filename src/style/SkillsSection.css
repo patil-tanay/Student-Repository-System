@@ -1,0 +1,31 @@
+.skills-section-container {
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+  }
+  
+  .skills-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .skills-list li {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  
+  input, select {
+    width: auto;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+  /* Additional styling can be added here */
+  

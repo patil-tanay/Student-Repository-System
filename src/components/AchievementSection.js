@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { auth, firestore } from './firebase';
+import '../style/AchievementSection.css';
 
 function AchievementSection({ achievementDetails, onUpdateAchievementDetails, onDeleteAchievementDetail }) {
   const [showAddAchievement, setShowAddAchievement] = useState(false);
@@ -70,7 +71,7 @@ function AchievementSection({ achievementDetails, onUpdateAchievementDetails, on
   };
 
   return (
-    <div>
+    <div className='achievement-section'>
       <h2>Achievements</h2>
       {!showAddAchievement && (
           <button onClick={() => setShowAddAchievement(true)}>Add Achievement</button>
