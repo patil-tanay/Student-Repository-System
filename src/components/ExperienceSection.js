@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { auth, firestore } from './firebase';
-import './ExperienceSection.css';
+import '../style/ExperienceSection.css';
 
 function ExperienceSection({ experienceDetails, setExperienceDetails }) {
   const [showAddExperience, setShowAddExperience] = useState(false);

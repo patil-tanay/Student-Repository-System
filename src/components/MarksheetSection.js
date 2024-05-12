@@ -87,7 +87,7 @@
 // export default MarksheetSection;
 import React, { useState } from 'react';
 import { auth, firestore, storage } from './firebase'; // Import Firebase modules
-import './MarksheetSection.css';
+import '../style/MarksheetSection.css';
 
 function MarksheetSection({ marksheetDetails, setMarksheetDetails }) {
   const [showAddMarksheet, setShowAddMarksheet] = useState(false);

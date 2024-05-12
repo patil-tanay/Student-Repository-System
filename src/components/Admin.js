@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { firestore } from '../firebase';
+import '../style/Admin.css';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);

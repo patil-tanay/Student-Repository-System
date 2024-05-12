@@ -237,7 +237,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth, firestore } from './firebase';
 
-import './EducationSection.css';
+import '../style/EducationSection.css';
 
 function EducationSection({ educationDetails, setEducationDetails }) {
   const [graduationDetails, setGraduationDetails] = useState({
@@ -310,7 +310,7 @@ function EducationSection({ educationDetails, setEducationDetails }) {
   const programs = ['', 'B.Tech'];
   const specializations = ['', 'CSE'];
   const boards = ['Select Board', 'CBSE', 'ICSE', 'State Board'];
-  const years = Array.from({ length: 30 }, (_, i) => new Date().getFullYear() - i);
+  // const years = Array.from({ length: 30 }, (_, i) => new Date().getFullYear() - i);
 
   return (
     <div className="education-section">

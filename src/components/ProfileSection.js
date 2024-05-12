@@ -1,6 +1,6 @@
 // ProfileSection.js
 import React, { useState } from 'react';
-import './ProfileSection.css'; // Import CSS file for styling
+import '../style/ProfileSection.css'; // Import CSS file for styling
 
 function ProfileSection({ userData, onUpdateProfile }) {
   const [isEditing, setIsEditing] = useState(false);

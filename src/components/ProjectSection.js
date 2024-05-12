@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { auth, firestore } from './firebase';
-import './ProjectSection.css'; // Import CSS file for styling
+import '../style/ProjectSection.css'; // Import CSS file for styling
 
 function ProjectSection({ projectDetails, setProjectDetails }) {
   const [showAddProject, setShowAddProject] = useState(false);

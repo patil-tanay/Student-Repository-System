@@ -1,7 +1,7 @@
 // Import React and useState
 import React, { useState } from 'react';
 import { auth, firestore } from '../firebase';
-import './SignUp.css'; // Import your CSS file
+import '../style/SignUp.css'; // Import your CSS file
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
