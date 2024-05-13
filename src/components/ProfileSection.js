@@ -134,7 +134,6 @@
 // export default ProfileSection;
 
 
-// ProfileSection.js
 import React, { useState } from 'react';
 import '../style/ProfileSection.css'; // Import CSS file for styling
 

@@ -47,7 +47,7 @@ const SignIn = () => {
     <div className="signin-container">
       <div className="left-section">
         <img
-          src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700"
+          src="https://i.postimg.cc/MpQfqn30/White-Green-Student-Classmeeting-Poster-1.png"
           alt="Login illustration"
           className="login-illustration"
         />
