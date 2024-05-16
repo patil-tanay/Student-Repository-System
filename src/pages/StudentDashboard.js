@@ -180,6 +180,10 @@ function StudentDashboard() {
   const [marksheetDetails, setMarksheetDetails] = useState([]);
   const [projectDetails, setProjectDetails] = useState([]);
   const navigate = useNavigate();
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
+
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -238,6 +242,22 @@ function StudentDashboard() {
     setSelectedSection(section);
   };
 
+  const handleChangePassword = async () => {
+    try {
+      const user = auth.currentUser;
+      if (user) {
+        await user.updatePassword(newPassword);
+        alert('Password changed successfully');
+        setIsChangingPassword(false);
+        setNewPassword('');
+      } else {
+        throw new Error('No user is currently signed in');
+      }
+    } catch (error) {
+      console.error('Error changing password', error);
+    }
+  };
+
   const handleLogout = () => {
     auth.signOut();
     navigate('/');
@@ -248,6 +268,30 @@ function StudentDashboard() {
     <div className="dashboard-container">
       <div className="sidebar">
         <h1>Dashboard</h1>
+        {userData ? (
+        <>
+          <h4 className='data'>{userData.email}</h4>
+          <h3 className='data'>{userData.name}</h3>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+        {isChangingPassword ? (
+        <div>
+          <input className='password-input' 
+            type="password" 
+            value={newPassword} 
+            onChange={e => setNewPassword(e.target.value)} 
+            placeholder="Enter new password"
+          />
+          <button onClick={handleChangePassword}>Submit</button>
+          <button onClick={() => setIsChangingPassword(false)}>Cancel</button>
+        </div>
+      ) : (
+        <button onClick={() => setIsChangingPassword(true)}>Change Password</button>
+      )}
+      <button className="button-primary" onClick={handleLogout}>Logout</button>
+        
         <ul>
           <li onClick={() => handleSectionClick('profile')}>Profile</li>
           <li onClick={() => handleSectionClick('education')}>Education</li>
@@ -259,6 +303,7 @@ function StudentDashboard() {
           <li onClick={() => handleSectionClick('projects')}>Projects</li>
           
         </ul>
+
         <button className="button-primary" onClick={handleLogout}>Logout</button>
       </div>
       <div className="main-content">

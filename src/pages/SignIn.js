@@ -1,8 +1,7 @@
-// Import React, useState, and CSS file
 import React, { useState } from 'react';
 import { auth, firestore } from '../firebase';
 import { useNavigate } from 'react-router-dom';
-import '../style/SignIn.css'; // Import your CSS file
+import '../style/SignIn.css';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -12,17 +11,21 @@ const SignIn = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+
+    // Form validation
+    if (!email || !password) {
+      setError('Please fill in all fields');
+      return;
+    }
+
     try {
-      // Sign in with email and password
       const userCredential = await auth.signInWithEmailAndPassword(email, password);
       const user = userCredential.user;
-      
-      // Fetch user role from Firestore
+
       const userDoc = await firestore.collection('users').doc(user.uid).get();
       const userData = userDoc.data();
       const userRole = userData.role;
 
-      // Redirect user to the appropriate dashboard based on role
       switch (userRole) {
         case 'student':
           navigate('/StudentDashboard');
@@ -33,16 +36,19 @@ const SignIn = () => {
         case 'faculty':
           navigate('/faculty');
           break;
-        // Add more cases for other roles if needed
         default:
-          // Redirect to a default dashboard or home page if role is unknown
           navigate('/');
       }
     } catch (error) {
-      setError(error.message);
+      if (error.code === 'auth/user-not-found') {
+        setError('No user with this email found');
+      } else if (error.code === 'auth/wrong-password') {
+        setError('Incorrect password');
+      } else {
+        setError('An error occurred. Please try again');
+      }
     }
   };
-
   return (
     <div className="signin-container">
       <div className="left-section">

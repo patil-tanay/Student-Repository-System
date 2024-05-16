@@ -164,10 +164,10 @@ function ProfileSection({ userData, onUpdateProfile }) {
             <label htmlFor="name">Name:</label>
             <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
           </div>
-          <div className="profile-section-field">
+          {/* <div className="profile-section-field">
             <label htmlFor="age">Age:</label>
             <input type="number" id="age" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" />
-          </div>
+          </div> */}
           <div className="profile-section-field">
             <label htmlFor="bio">Bio:</label>
             <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Bio"></textarea>
@@ -224,10 +224,10 @@ function ProfileSection({ userData, onUpdateProfile }) {
             <span className="item-label">Name:</span>
             <span className="item-value">{userData.name}</span>
           </div>
-          <div className="profile-section-item">
+          {/* <div className="profile-section-item">
             <span className="item-label">Age:</span>
             <span className="item-value">{userData.age}</span>
-          </div>
+          </div> */}
           <div className="profile-section-item">
             <span className="item-label">Bio:</span>
             <span className="item-value">{userData.bio}</span>

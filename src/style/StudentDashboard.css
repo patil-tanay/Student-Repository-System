@@ -225,3 +225,17 @@ button {
 
 
 
+input.password-input {
+  width: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+h3.data{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 1px;
+  color: #333;
+}

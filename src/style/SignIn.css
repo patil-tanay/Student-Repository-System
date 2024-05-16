@@ -62,3 +62,10 @@
 .signin-button:hover {
   background-color: #0056b3;
 }
+
+input[type="password"] {
+
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
