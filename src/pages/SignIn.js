@@ -49,6 +49,12 @@ const SignIn = () => {
       }
     }
   };
+
+  const handleAdminSignUp = () => {
+    navigate('/signup');
+  };
+
+
   return (
     <div className="signin-container">
       <div className="left-section">
@@ -84,6 +90,7 @@ const SignIn = () => {
           </div>
           <button className="signin-button" type="submit">Sign In</button>
         </form>
+        <button className="admin-signup-button" onClick={handleAdminSignUp}>Admin Page</button>
       </div>
     </div>
   );

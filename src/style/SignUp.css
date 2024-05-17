@@ -63,3 +63,27 @@
     color: green;
   }
   
+
+  .access-code-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .access-code-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .access-code-header {
+    margin-bottom: 20px;
+  }
+  
+  .access-code-form input,
+  .access-code-form button {
+    margin: 10px 0;
+  }
+  

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { auth, firestore } from './firebase';
 import '../style/AchievementSection.css';
 
-function AchievementSection({ achievementDetails, onUpdateAchievementDetails, onDeleteAchievementDetail }) {
+function AchievementSection({ achievementDetails, setAchievementDetails, onDeleteAchievementDetail }) {
   const [showAddAchievement, setShowAddAchievement] = useState(false);
   const [achievementName, setAchievementName] = useState('');
   const [achievementOrganization, setAchievementOrganization] = useState('');
   const [achievementDate, setAchievementDate] = useState('');
   const [achievementDescription, setAchievementDescription] = useState('');
   const [editIndex, setEditIndex] = useState(-1);
-  const [setAchievementDetails] = useState([]);
+  // const [setAchievementDetails] = useState([]);
 
   const handleAddAchievementDetail = () => {
     const newAchievementDetails = [

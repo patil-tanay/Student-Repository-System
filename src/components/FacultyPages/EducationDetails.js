@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { firestore } from '../components/firebase';
+import { firestore } from '../firebase';
 import * as XLSX from 'xlsx';
-
+// import '../style/EducationDashboard.css';
+import './EducationDetails.css';
+// F:/AI/Minor-2/src/style/EducationDetails.css
 function FacultyDashboard() {
   const [studentsData, setStudentsData] = useState([]);
   const [percentageFilter12th, setPercentageFilter12th] = useState('');
@@ -63,7 +65,7 @@ function FacultyDashboard() {
         />
         <button onClick={downloadExcel}>Download</button>
       </div>
-      <table>
+      <table className="table-responsive">
         <thead>
           <tr>
             <th>Name</th>
@@ -73,11 +75,9 @@ function FacultyDashboard() {
             <th>Specialization</th>
             <th>CGPA</th>
             <th>Current Semester</th>
-            <th>School Name (12th)</th>
             <th>Board (12th)</th>
             <th>Percentage (12th)</th>
             <th>Year of Completion (12th)</th>
-            <th>School Name (10th)</th>
             <th>Board (10th)</th>
             <th>Percentage (10th)</th>
             <th>Year of Completion (10th)</th>
@@ -93,11 +93,9 @@ function FacultyDashboard() {
               <td>{student.educationDetails?.graduationDetails?.specialization}</td>
               <td>{student.educationDetails?.graduationDetails?.cgpa}</td>
               <td>{student.educationDetails?.graduationDetails?.currentSemester}</td>
-              <td>{student.educationDetails?.standard12thDetails?.schoolName}</td>
               <td>{student.educationDetails?.standard12thDetails?.board}</td>
               <td>{student.educationDetails?.standard12thDetails?.percentage}</td>
               <td>{student.educationDetails?.standard12thDetails?.yearOfCompletion}</td>
-              <td>{student.educationDetails?.standard10thDetails?.schoolName}</td>
               <td>{student.educationDetails?.standard10thDetails?.board}</td>
               <td>{student.educationDetails?.standard10thDetails?.percentage}</td>
               <td>{student.educationDetails?.standard10thDetails?.yearOfCompletion}</td>

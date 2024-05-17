@@ -4,7 +4,7 @@
 }
 
 .left-section {
-  flex: 1;
+  flex: 2 1;
   background-color: #ffffff;
   display: flex;
   justify-content: center;

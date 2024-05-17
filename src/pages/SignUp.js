@@ -4,11 +4,23 @@ import { auth, firestore } from '../firebase';
 import '../style/SignUp.css'; // Import your CSS file
 
 const SignUp = () => {
+  const [accessCode, setAccessCode] = useState('');
+  const [isCodeValid, setIsCodeValid] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+
+  const handleAccessCodeSubmit = (e) => {
+    e.preventDefault();
+    if (accessCode === '0827') {
+      setIsCodeValid(true);
+      setError(null); // Clear any previous error
+    } else {
+      setError('Invalid access code');
+    }
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -37,32 +49,48 @@ const SignUp = () => {
 
   return (
     <div className="signup-container">
-      <div className="left-section">
-      <img
-          src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700"
-          alt="Login illustration"
-          className="login-illustration"
-        /> 
-      </div>
-      <div className="right-section">
-        <h2 className="signup-header">Sign Up</h2>
-        <form className="signup-form" onSubmit={handleSignUp}>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          <label>Role:</label>
-          <select value={role} onChange={(e) => setRole(e.target.value)} required>
-            <option value="">Select Role</option>
-            <option value="student">Student</option>
-            <option value="faculty">Faculty</option>
-            <option value="admin">Admin</option>
-          </select>
-          <button type="submit">Sign Up</button>
-        </form>
-        {error && <p className="error">{error}</p>}
-        {successMessage && <p className="success">{successMessage}</p>}
-      </div>
+      {isCodeValid ? (
+        <>
+          <div className="left-section">
+            <img
+              src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700"
+              alt="Login illustration"
+              className="login-illustration"
+            /> 
+          </div>
+          <div className="right-section">
+            <h2 className="signup-header">Sign Up</h2>
+            <form className="signup-form" onSubmit={handleSignUp}>
+              <label>Email:</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <label>Password:</label>
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <label>Role:</label>
+              <select value={role} onChange={(e) => setRole(e.target.value)} required>
+                <option value="">Select Role</option>
+                <option value="student">Student</option>
+                <option value="faculty">Faculty</option>
+                <option value="admin">Admin</option>
+              </select>
+              <button type="submit">Sign Up</button>
+            </form>
+            {error && <p className="error">{error}</p>}
+            {successMessage && <p className="success">{successMessage}</p>}
+          </div>
+        </>
+      ) : (
+        <div className="access-code-container">
+          <div>
+            <h2 className="access-code-header">Enter Access Code</h2>
+            <form className="access-code-form" onSubmit={handleAccessCodeSubmit}>
+              <label>Access Code:</label>
+              <input type="text" value={accessCode} onChange={(e) => setAccessCode(e.target.value)} required />
+              <button type="submit">Submit</button>
+            </form>
+            {error && <p className="error">{error}</p>}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
