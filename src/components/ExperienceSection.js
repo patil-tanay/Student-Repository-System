@@ -91,25 +91,25 @@ function ExperienceSection({ experienceDetails, setExperienceDetails }) {
       )}
       <div className="experience-details">
         <h3>Experience Details</h3>
-        <ul>
-          <li className="header">
-            <p>Title</p>
-            <p>Organization</p>
-            <p>Start Date</p>
-            <p>End Date</p>
-            <p>Description</p>
-            <p>Actions</p>
-          </li>
-          {experienceDetails.map((experience, index) => (
-            <li key={index}>
-              <p>{experience.title}</p>
-              <p>{experience.organization}</p>
-              <p>{experience.startDate}</p>
-              <p>{experience.endDate}</p>
-              <p>{experience.description}</p>
-              <button className="edit-button" onClick={() => handleEditExperienceDetail(index)}>Edit</button>
-              <button className="delete-button" onClick={() => handleDeleteExperienceDetail(index)}>Delete</button>
-            </li>
+        <ul className="experience-list">
+  <li className="header">
+    <p className="list-item">Title</p>
+    <p className="list-item">Organization</p>
+    <p className="list-item">Start Date</p>
+    <p className="list-item">End Date</p>
+    <p className="list-item">Description</p>
+    <p className="list-item">Actions</p>
+  </li>
+  {experienceDetails.map((experience, index) => (
+    <li key={index} className="list-item">
+      <p>{experience.title}</p>
+      <p>{experience.organization}</p>
+      <p>{experience.startDate}</p>
+      <p>{experience.endDate}</p>
+      <p>{experience.description}</p>
+      <button className="edit-button" onClick={() => handleEditExperienceDetail(index)}>Edit</button>
+      <button className="delete-button" onClick={() => handleDeleteExperienceDetail(index)}>Delete</button>
+    </li>
           ))}
         </ul>
       </div>

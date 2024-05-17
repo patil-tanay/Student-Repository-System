@@ -68,37 +68,37 @@ function FacultyDashboard() {
       <table className="table-responsive">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Year of Graduation</th>
-            <th>Program</th>
-            <th>Specialization</th>
-            <th>CGPA</th>
-            <th>Current Semester</th>
-            <th>Board (12th)</th>
-            <th>Percentage (12th)</th>
-            <th>Year of Completion (12th)</th>
-            <th>Board (10th)</th>
-            <th>Percentage (10th)</th>
-            <th>Year of Completion (10th)</th>
+            <th className="table-cell">Name</th>
+            <th className="table-cell">Email</th>
+            <th className="table-cell">Year of Graduation</th>
+            <th className="table-cell">Program</th>
+            <th className="table-cell">Specialization</th>
+            <th className="table-cell">CGPA</th>
+            <th className="table-cell">Current Semester</th>
+            <th className="table-cell">Board (12th)</th>
+            <th className="table-cell">Percentage (12th)</th>
+            <th className="table-cell">Year of Completion (12th)</th>
+            <th className="table-cell">Board (10th)</th>
+            <th className="table-cell">Percentage (10th)</th>
+            <th className="table-cell">Year of Completion (10th)</th>
           </tr>
         </thead>
         <tbody>
           {filteredStudentsData.map(student => (
             <tr key={student.id}>
-              <td>{student.name}</td>
-              <td>{student.email}</td>
-              <td>{student.educationDetails?.graduationDetails?.yearOfGraduation}</td>
-              <td>{student.educationDetails?.graduationDetails?.program}</td>
-              <td>{student.educationDetails?.graduationDetails?.specialization}</td>
-              <td>{student.educationDetails?.graduationDetails?.cgpa}</td>
-              <td>{student.educationDetails?.graduationDetails?.currentSemester}</td>
-              <td>{student.educationDetails?.standard12thDetails?.board}</td>
-              <td>{student.educationDetails?.standard12thDetails?.percentage}</td>
-              <td>{student.educationDetails?.standard12thDetails?.yearOfCompletion}</td>
-              <td>{student.educationDetails?.standard10thDetails?.board}</td>
-              <td>{student.educationDetails?.standard10thDetails?.percentage}</td>
-              <td>{student.educationDetails?.standard10thDetails?.yearOfCompletion}</td>
+              <td className="table-cell">{student.name}</td>
+              <td className="table-cell">{student.email}</td>
+              <td className="table-cell">{student.educationDetails?.graduationDetails?.yearOfGraduation}</td>
+              <td className="table-cell">{student.educationDetails?.graduationDetails?.program}</td>
+              <td className="table-cell">{student.educationDetails?.graduationDetails?.specialization}</td>
+              <td className="table-cell">{student.educationDetails?.graduationDetails?.cgpa}</td>
+              <td className="table-cell">{student.educationDetails?.graduationDetails?.currentSemester}</td>
+              <td className="table-cell">{student.educationDetails?.standard12thDetails?.board}</td>
+              <td className="table-cell">{student.educationDetails?.standard12thDetails?.percentage}</td>
+              <td className="table-cell">{student.educationDetails?.standard12thDetails?.yearOfCompletion}</td>
+              <td className="table-cell">{student.educationDetails?.standard10thDetails?.board}</td>
+              <td className="table-cell">{student.educationDetails?.standard10thDetails?.percentage}</td>
+              <td className="table-cell">{student.educationDetails?.standard10thDetails?.yearOfCompletion}</td>
             </tr>
           ))}
         </tbody>

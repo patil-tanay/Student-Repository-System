@@ -59,10 +59,10 @@ function FacultyDashboard() {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Enrollment No</th>
-            <th>Class</th>
+            <th className="table-cell">Name</th>
+            <th className="table-cell">Email</th>
+            <th className="table-cell">Enrollment No</th>
+            <th className="table-cell">Class</th>
           </tr>
         </thead>
         <tbody>
@@ -79,10 +79,10 @@ function FacultyDashboard() {
             })
             .map((student, index) => (
               <tr key={student.id}>
-                <td>{student.name}</td>
-                <td>{student.email}</td>
-                <td>{student.enrollmentNumber}</td>
-                <td>{student.selectedClass}</td>
+                <td className="table-cell">{student.name}</td>
+                <td className="table-cell">{student.email}</td>
+                <td className="table-cell">{student.enrollmentNumber}</td>
+                <td className="table-cell">{student.selectedClass}</td>
               </tr>
             ))}
         </tbody>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { auth, firestore } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 import '../style/SignIn.css';
 
 const SignIn = () => {
@@ -8,6 +9,7 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -71,22 +73,32 @@ const SignIn = () => {
           <div className="form-group">
             <label>Email:</label>
             <input
-              className="form-input"
+              className="form-inputs"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+
+              placeholder="Email"
             />
           </div>
           <div className="form-group">
             <label>Password:</label>
             <input
-              className="form-input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
             />
+            
+            <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="toggle-password-visibility"
+            >
+              {showPassword ? <FiEyeOff /> : <FiEye />}
+              </button>
           </div>
           <button className="signin-button" type="submit">Sign In</button>
         </form>

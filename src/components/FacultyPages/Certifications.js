@@ -1,95 +1,81 @@
-// Import necessary components
-import React, { useEffect, useState } from 'react';
-import { firestore } from '../firebase'; // Assuming 'firestore' is imported from firebase
-import * as XLSX from 'xlsx'; // Import xlsx library
-// import './style/FacultyDashboard.css'; // Import CSS styles
+import React, { useState, useEffect } from 'react';
+import { firestore } from '../firebase';
+import * as XLSX from 'xlsx';
+import './certification.css'; // Ensure the CSS file is correctly linked
 
-// Function FacultyDashboard
-function FacultyDashboard() {
-  // Initialize state variables
-  const [studentData, setStudentData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+function CertificateDashboard() {
+  const [studentsData, setStudentsData] = useState([]);
+  const [certificateFilter, setCertificateFilter] = useState('');
 
-
-  // UseEffect hook to fetch student data from Firestore
   useEffect(() => {
-    const fetchStudentData = async () => {
-      const studentsRef = await firestore.collection('users').where('role', '==', 'student').get();
-      const studentsData = studentsRef.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setStudentData(studentsData);
+    const fetchStudentsData = async () => {
+      const studentsCollection = await firestore.collection('users').get();
+      setStudentsData(studentsCollection.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     };
 
-    fetchStudentData();
+    fetchStudentsData();
   }, []);
 
-  // Function to handle Excel export
-  const handleExportToExcel = () => {
-    const filteredData = studentData.filter((student) => {
-      const name = student.name || '';
-      const email = student.email || '';
-      const selectedClass = student.selectedClass || '';
-      return (
-        name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        selectedClass.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        email.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    });
+  const filteredStudentsData = studentsData.filter(student =>
+    student.certificateDetails?.some(certificate =>
+      certificate.name.toLowerCase().includes(certificateFilter.toLowerCase())
+    )
+  );
 
-    // Create a new workbook
-    const workbook = XLSX.utils.book_new();
-    // Convert data to worksheet
-    const worksheet = XLSX.utils.json_to_sheet(filteredData);
-    // Add worksheet to workbook
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Filtered Data');
-    // Save workbook to file
-    XLSX.writeFile(workbook, 'filtered_data.xlsx');
+  const downloadExcel = () => {
+    const dataToDownload = filteredStudentsData.map(student => ({
+      name: student.name,
+      email: student.email,
+      certificates: student.certificateDetails?.map(cert => cert.name).join(', '),
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(dataToDownload);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Certificates");
+    XLSX.writeFile(wb, "certificates.xlsx");
   };
 
-  // Return JSX for the Faculty Dashboard
   return (
-    <div>
-      <h1>Faculty Dashboard</h1>
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search by name, email, or class"
-      />
-      <button onClick={handleExportToExcel}>Export to Excel</button>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Enrollment No</th>
-            <th>Class</th>
-          </tr>
-        </thead>
-        <tbody>
-          {studentData
-            .filter((student) => {
-              const name = student.name || '';
-              const email = student.email || '';
-              const selectedClass = student.selectedClass || '';
-              return (
-                name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                selectedClass.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                email.toLowerCase().includes(searchQuery.toLowerCase())
-              );
-            })
-            .map((student, index) => (
-              <tr key={student.id}>
-                <td>{student.name}</td>
-                <td>{student.email}</td>
-                <td>{student.enrollmentNumber}</td>
-                <td>{student.selectedClass}</td>
+    <div className="certificate-dashboard">
+      <h2>Certificate Dashboard</h2>
+      <div>
+        Filter by Certificate Name: 
+        <input 
+          type="text" 
+          value={certificateFilter} 
+          onChange={e => setCertificateFilter(e.target.value)} 
+          placeholder="Enter certificate name"
+        />
+        <button onClick={downloadExcel}>Download</button>
+      </div>
+      <table className="table-responsive">
+      <thead>
+  <tr>
+    <th className="table-cell">Name</th>
+    <th className="table-cell">Email</th>
+    <th className="table-cell">Class</th>
+    <th className="table-cell">Certificate Name</th>
+    <th className="table-cell">Actions</th>
+  </tr>
+</thead>
+<tbody>
+  {filteredStudentsData.map(student => (
+    student.certificateDetails.map((certificate, index) => (
+      <tr key={`${student.id}-${index}`}>
+        <td className="table-cell">{student.name}</td>
+        <td className="table-cell">{student.email}</td>
+        <td className="table-cell">{student.selectedClass}</td>
+        <td className="table-cell">{certificate.name}</td>
+        <td className="table-cell">
+          <a href={certificate.certificateURL} target="_blank" rel="noopener noreferrer">View</a>
+        </td>
               </tr>
-            ))}
+            ))
+          ))}
         </tbody>
       </table>
     </div>
   );
 }
 
-// Export the FacultyDashboard component
-export default FacultyDashboard;
+export default CertificateDashboard;

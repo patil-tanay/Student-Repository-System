@@ -69,3 +69,21 @@ input[type="password"] {
     padding: 10px;
     margin-bottom: 10px;
 }
+
+
+.password-input {
+  position: relative;
+}
+
+input[type="email"], input[type="password"], textarea{
+  width: 211px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.form-inputs{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
