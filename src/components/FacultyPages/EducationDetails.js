@@ -9,6 +9,7 @@ function FacultyDashboard() {
   const [percentageFilter12th, setPercentageFilter12th] = useState('');
   const [percentageFilter10th, setPercentageFilter10th] = useState('');
   const [cgpaFilter, setCgpaFilter] = useState('');
+  // const sortedStudentsData = [...filteredStudentsData].sort((a, b) => a.name.localeCompare(b.name));
 
   useEffect(() => {
     const fetchStudentsData = async () => {

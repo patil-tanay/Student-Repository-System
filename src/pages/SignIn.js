@@ -82,24 +82,23 @@ const SignIn = () => {
               placeholder="Email"
             />
           </div>
-          <div className="form-group">
-            <label>Password:</label>
-            <input
-            type={showPassword ? 'text' : 'password'}
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            />
-            
-            <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="toggle-password-visibility"
-            >
-              {showPassword ? <FiEyeOff /> : <FiEye />}
-              </button>
-          </div>
+          <div className="password-wrapper">
+  <label>Password:</label>
+  <input
+    type={showPassword ? 'text' : 'password'}
+    name="password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="Password"
+  />
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="toggle-password-visibility"
+  >
+    {showPassword ? <FiEyeOff /> : <FiEye />}
+  </button>
+</div>
           <button className="signin-button" type="submit">Sign In</button>
         </form>
         <button className="admin-signup-button" onClick={handleAdminSignUp}>Admin Page</button>

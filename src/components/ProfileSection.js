@@ -161,16 +161,16 @@ function ProfileSection({ userData, onUpdateProfile }) {
       {isEditing ? (
         <div className="edit-profile-form">
           <div className="profile-section-field">
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+            <label htmlFor="name">Name:</label> 
+            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required/>
           </div>
           <div className="profile-section-field">
             <label htmlFor="age">Age:</label>
-            <input type="number" id="age" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" />
+            <input type="number" id="age" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" required />
           </div>
           <div className="profile-section-field">
             <label htmlFor="bio">Bio:</label>
-            <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Bio"></textarea>
+            <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Bio" required></textarea>
           </div>
           <div className="profile-section-field">
             <label htmlFor="address">Address:</label>

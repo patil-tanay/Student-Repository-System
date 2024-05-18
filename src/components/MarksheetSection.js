@@ -1,5 +1,3 @@
-
-
 // export default MarksheetSection;
 import React, { useState } from 'react';
 import { auth, firestore, storage } from './firebase'; // Import Firebase modules
