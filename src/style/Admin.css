@@ -61,3 +61,7 @@
     background-color: #c82333;
   }
   
+
+  .table-cell {
+    border: 1px solid #000; /* Change the color as needed */
+  }
