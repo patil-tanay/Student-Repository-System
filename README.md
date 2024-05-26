@@ -62,4 +62,3 @@ For any questions or feedback, please contact us at [tanaypatil25@gmail.com].
 ---
 
 Thank you for using the Student Repository System! We hope it enhances the management and utilization of student data in your educational institution.
-```
